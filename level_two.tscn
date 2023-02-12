@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://LevelTwo.png" type="Texture" id=2]
+[ext_resource path="res://moving_platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://button_stop_area.tscn" type="PackedScene" id=5]
+[ext_resource path="res://hidden_ground.tscn" type="PackedScene" id=6]
+[ext_resource path="res://button_show_area.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 33.4, 132.332, 0, 0, 0, 0, 126.031, 133.746, 0, 0, 0, 0, 158.912, 133.039, 0, 0, 0, 0, 173.942, 133.278, 0, 0, 0, 0, 174.468, 123.847, 0, 0, 0, 0, 121.788, 123.847, 0, 0, 0, 0, 33.0465, 123.847, 0, 0, 0, 0, 33.4, 132.332 )
+}
+
+[node name="LevelTwo" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2( 123.377, 102.004 )
+
+[node name="Sprite" type="Sprite" parent="Ground"]
+position = Vector2( -15, -48 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground"]
+polygon = PoolVector2Array( -125.209, -60.133, -28.9574, -59.8524, -28.9612, -45.9142, -10.1599, -45.7739, -9.739, -13.5031, 25.1976, -13.7837, 24.9521, -48.8331, 55.0832, -48.5801, 55.1372, 6.93416, -28.1156, 6.65346, -124.61, 7.37794 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Ground"]
+position = Vector2( 84.0997, -39.3725 )
+polygon = PoolVector2Array( 10.9399, -9.65941, -9.8947, -9.65941, -9.8947, 45.8996, 11.1384, 46.0981 )
+
+[node name="ObstaclePath2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 18.511, -105.037 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" parent="ObstaclePath2D" index="0"]
+position = Vector2( 110.651, 133.511 )
+offset = 77.2161
+
+[node name="ButtonShowArea" parent="ObstaclePath2D/PathFollow2D/Platform" index="1" instance=ExtResource( 7 )]
+position = Vector2( -16.811, -9.09723 )
+hiddenGroundAnim = NodePath("../../../../HiddenGround")
+
+[node name="HiddenGround" parent="." instance=ExtResource( 6 )]
+position = Vector2( 124.064, 69.3127 )
+
+[node name="ButtonStopArea" parent="." instance=ExtResource( 5 )]
+position = Vector2( 139.384, 69.4812 )
+movingPlatform = NodePath("../ObstaclePath2D/PathFollow2D")
+
+[editable path="ObstaclePath2D"]

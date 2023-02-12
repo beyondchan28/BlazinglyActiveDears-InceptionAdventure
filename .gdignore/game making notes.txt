@@ -1,0 +1,73 @@
+Blazingly Active Dears : Inception Adventour
+
+all needed :
+- design the game !
+- making a funny looking animation
+- making a good level design asset and gameplay
+- making some character needed for the game
+
+
+needed :
+- knockback(X)
+- walking(X)
+- start menu(X)
+- switching cam(X)
+- collectible logic(X)
+- jumping(X)
+- collectibles assets and sound
+	+ candle(X)
+	+ balloon(X)
+	+ gifts(X)
+	+ cake(X)
+	+ button()
+- assets
+	+ font(X)
+	+ ending scene()
+	+ MC(X)
+    + enemy ()
+	+ ground
+		> Tanah(X)
+		> Rumput(X)
+		> Jalan raya(X)
+		> keramik(X)
+        > button ()
+        > message box ()
+	+ background
+		> Skyscrappers and monas ()
+		> sawah dan pegunungan ()
+		> Rumput ()
+		> Keramik ()
+	+ collectibles(X)
+- hidden ground and button (X)
+- moving platform and on/off button (X)
+- button for interactable object ()
+- using 6-bit sound effects ()
+- restart button, refresh position on current level ()
+
+progress :
+- making the level design(X)
+- making the puzzle ()
+- make animation on the engine, not sprite sheet:
+    > player (X)
+    > cat ()
+    > enemy ()
+    > box message ()
+- start coding the game:
+    > setting up the level design ()
+    > door mechanics ()
+    > respawn ()
+    > grab and moving an object mechanics (X)
+
+bugs :
+- ButtonStop floating out of nowhere ()
+- There's case that the player stuck in the ground after getting knockback ()
+
+
+design :
+- Walking around to collect letter
+- some text and effect to make it cooler 
+- making some interactable buttons and doors
+- simple puzzle 
+- with some simple but funny obstacle like :
+	+ first, showing enemy and some text about the EVENT
+	+ second, 

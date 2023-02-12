@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://button_show.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 5.17249, 0.751559 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 5.2311, 0.537853 )
+
+[node name="ButtonShowArea" type="Area2D"]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.00823689, 0.620046 )
+shape = SubResource( 15 )
+
+[node name="ButtonBody" type="StaticBody2D" parent="."]
+position = Vector2( 0.589027, 5.68275 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonBody"]
+position = Vector2( -0.670898, -3.8055 )
+shape = SubResource( 14 )
+one_way_collision = true
+
+[connection signal="area_entered" from="." to="." method="_on_ButtonShowArea_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_ButtonShowArea_body_entered"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://LevelOne.png" type="Texture" id=2]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://pause_menu.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 47.5, 8 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 54.183, 17.8535 )
+
+[node name="LevelOne" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+script = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 14.0
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -27.5
+margin_top = -10.0
+margin_right = 27.5
+margin_bottom = 10.0
+text = "MULAI"
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2( 123.377, 102.004 )
+
+[node name="Sprite" type="Sprite" parent="Ground"]
+position = Vector2( -15, -48 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2( -77.6682, -6 )
+shape = SubResource( 11 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground"]
+position = Vector2( 40.7684, -9.97253 )
+shape = SubResource( 12 )
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 121.656, 64.51 )
+
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_Button_pressed"]
