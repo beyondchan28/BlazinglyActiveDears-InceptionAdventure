@@ -50,6 +50,6 @@ position = Vector2( 40.7684, -9.97253 )
 shape = SubResource( 12 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 121.656, 64.51 )
+position = Vector2( 153, 64 )
 
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_Button_pressed"]

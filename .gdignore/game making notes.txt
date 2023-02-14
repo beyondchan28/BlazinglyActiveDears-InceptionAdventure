@@ -42,7 +42,7 @@ needed :
 - moving platform and on/off button (X)
 - button for interactable object ()
 - using 6-bit sound effects ()
-- restart button, refresh position on current level ()
+- restart button, refresh position on current level (X)
 
 progress :
 - making the level design(X)
@@ -55,12 +55,12 @@ progress :
 - start coding the game:
     > setting up the level design ()
     > door mechanics ()
-    > respawn ()
+    > respawn (X)
     > grab and moving an object mechanics (X)
 
 bugs :
-- ButtonStop floating out of nowhere ()
-- There's case that the player stuck in the ground after getting knockback ()
+- ButtonStop floating out of nowhere (X)
+- There's case that the player stuck in the ground after getting knockback (X)
 
 
 design :

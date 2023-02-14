@@ -8,7 +8,7 @@ const JUMP_HEIGHT = -125
 
 var motion = Vector2.ZERO
 
-var knockBackStrength := 5.0
+var knockBackStrength := 200.0
 
 onready var anim = $AnimationPlayer
 onready var graphic = $Sprite
@@ -46,7 +46,7 @@ func _physics_process(delta):
 		if fraction == true :
 			motion.x = lerp(motion.x, 0, 0.05)
 		
-	motion = self.move_and_slide(motion, UP, true)
+	motion = self.move_and_slide(motion , UP, true)
 
 
 func play_anim(anim_name: String):
@@ -57,13 +57,18 @@ func play_anim(anim_name: String):
 
 func receive_knockback(knockBackSourcePos: Vector2):
 	var knockBackDirection = knockBackSourcePos.direction_to(self.global_position)
-	var knockBack = (knockBackDirection * knockBackStrength) + self.global_position
+	var knockBack = (knockBackDirection * knockBackStrength)
 	
-	tween.interpolate_property(self, "global_position",
-	self.global_position, knockBack, 0.2,
-	Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+	knockBack.y = 0
+	motion.x += knockBack.x
 	
-	tween.start()
+#	tween.interpolate_property(self, "global_position",
+#	self.global_position, knockBack, 0.2,
+#	Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+#
+#	print("knockback: ", knockBack)
+#	print("self: ", self.global_position)
+#	tween.start()
 	
 
 func _on_HitBox_body_entered(body):
