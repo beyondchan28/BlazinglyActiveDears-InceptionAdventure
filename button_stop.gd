@@ -9,7 +9,7 @@ export(NodePath) onready var movingPlatform = get_node(movingPlatform) as PathFo
 func _ready():
 	ori_pos = self.global_position
 
-func _process(delta):
+func _physics_process(delta):
 	if go_down :
 		self.position.y += 1
 		
@@ -20,8 +20,9 @@ func _process(delta):
 
 func _on_ButtonStopArea_area_entered(area):
 	if area.name == "FootArea":
-		print(self.global_position.length() - ori_pos.length())
-		go_down = true
+#		print(self.global_position.length() - ori_pos.length())
+		if area.global_position.y < self.global_position.y + $CollisionShape2D.shape.y/2.0:
+			go_down = true
 #		print("ori pos ", ori_pos.length())
 
 

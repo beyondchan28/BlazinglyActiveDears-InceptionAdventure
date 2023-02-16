@@ -43,6 +43,8 @@ needed :
 - button for interactable object ()
 - using 6-bit sound effects ()
 - restart button, refresh position on current level (X)
+- making show and hidden button (X)
+- rigidbody and door for collectibles ()
 
 progress :
 - making the level design(X)
@@ -60,10 +62,13 @@ progress :
 
 bugs :
 - ButtonStop floating out of nowhere (X)
+- ButtonShow not stopping(X)
 - There's case that the player stuck in the ground after getting knockback (X)
+- How to make the area to only triggered if the player jump and collide on it, not jst collide ()
 
 
 design :
+- current button logic is not felt great
 - Walking around to collect letter
 - some text and effect to make it cooler 
 - making some interactable buttons and doors

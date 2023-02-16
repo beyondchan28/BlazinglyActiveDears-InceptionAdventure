@@ -27,5 +27,5 @@ position = Vector2( -0.670898, -3.8055 )
 shape = SubResource( 14 )
 one_way_collision = true
 
-[connection signal="area_entered" from="." to="." method="_on_ButtonShowArea_area_entered"]
+[connection signal="area_entered" from="." to="." method="_on_ButtonShowArea_area_entered" flags=6]
 [connection signal="body_entered" from="." to="." method="_on_ButtonShowArea_body_entered"]
