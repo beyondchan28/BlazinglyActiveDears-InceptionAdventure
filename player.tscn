@@ -197,3 +197,4 @@ shape = SubResource( 18 )
 position = Vector2( 0.875, -5.3125 )
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
+[connection signal="body_entered" from="FootArea" to="." method="_on_FootArea_body_entered" flags=3]

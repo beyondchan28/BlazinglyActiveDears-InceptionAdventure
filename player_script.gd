@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const UP = Vector2.UP
+const DOWN = Vector2.DOWN
 const MAX_SPEED = 50
 const GRAVITY = 7.5
 const ACCELERATION = 12.5
@@ -46,7 +47,7 @@ func _physics_process(delta):
 		if fraction == true :
 			motion.x = lerp(motion.x, 0, 0.05)
 		
-	motion = self.move_and_slide(motion , UP, true)
+	motion = self.move_and_slide_with_snap(motion,DOWN, UP, true)
 
 
 func play_anim(anim_name: String):
@@ -75,3 +76,6 @@ func _on_HitBox_body_entered(body):
 	if body.name == "Enemy" :
 		receive_knockback(body.global_position)
 
+func _on_FootArea_body_entered(body):
+	if body.is_in_group("Button") and self.is_on_floor():
+		body.curr_button_state = body.BUTTON_STATE.PRESSED

@@ -1,10 +1,11 @@
-Blazingly Active Dears : Inception Adventour
+Blazingly Active Dears : Inception Adventure
 
 all needed :
 - design the game !
 - making a funny looking animation
 - making a good level design asset and gameplay
 - making some character needed for the game
+- need to learn about the physics in godot or game in general
 
 
 needed :
@@ -64,7 +65,7 @@ bugs :
 - ButtonStop floating out of nowhere (X)
 - ButtonShow not stopping(X)
 - There's case that the player stuck in the ground after getting knockback (X)
-- How to make the area to only triggered if the player jump and collide on it, not jst collide ()
+- How to make the area to only triggered if the player jump and collide on it, not jst collide (X)
 
 
 design :

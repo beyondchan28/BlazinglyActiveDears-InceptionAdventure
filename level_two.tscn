@@ -1,21 +1,79 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Unique ground.png" type="Texture" id=1]
 [ext_resource path="res://LevelTwo.png" type="Texture" id=2]
-[ext_resource path="res://camera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Candle.png" type="Texture" id=3]
 [ext_resource path="res://moving_platform.tscn" type="PackedScene" id=4]
-[ext_resource path="res://button_stop_area.tscn" type="PackedScene" id=5]
+[ext_resource path="res://show_button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://hidden_ground.tscn" type="PackedScene" id=6]
-[ext_resource path="res://button_show_area.tscn" type="PackedScene" id=7]
+[ext_resource path="res://stop_button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://collectible.tscn" type="PackedScene" id=8]
 
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 33.4, 132.332, 0, 0, 0, 0, 126.031, 133.746, 0, 0, 0, 0, 158.912, 133.039, 0, 0, 0, 0, 173.942, 133.278, 0, 0, 0, 0, 174.468, 123.847, 0, 0, 0, 0, 121.788, 123.847, 0, 0, 0, 0, 33.0465, 123.847, 0, 0, 0, 0, 33.4, 132.332 )
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("KinematicBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 83, -1 ) ]
 }
+
+[sub_resource type="Animation" id=4]
+resource_name = "moving_platform"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("KinematicBody2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.6, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 83, -1 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 5, 2 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 30, 5 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 30, 0, 30, 5 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 60, 0, 30, 5 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 90, 0, 30, 5 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": true,
+"name": "jump pad",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 10, 2 )
 
 [node name="LevelTwo" type="Node2D"]
 
-[node name="Ground" type="StaticBody2D" parent="."]
+[node name="Ground" type="StaticBody2D" parent="." groups=["ground"]]
 position = Vector2( 125.377, 102.194 )
 
 [node name="Sprite" type="Sprite" parent="Ground"]
@@ -29,29 +87,61 @@ polygon = PoolVector2Array( -125.209, -60.133, -28.9574, -59.8524, -28.9612, -45
 position = Vector2( 84.0997, -39.3725 )
 polygon = PoolVector2Array( 10.9399, -9.65941, -9.8947, -9.65941, -9.8947, 45.8996, 11.1384, 46.0981 )
 
-[node name="ObstaclePath2D" parent="." instance=ExtResource( 4 )]
-position = Vector2( 20.511, -104.847 )
-curve = SubResource( 1 )
-
-[node name="PathFollow2D" parent="ObstaclePath2D" index="0"]
-position = Vector2( 110.651, 133.511 )
-offset = 77.2161
-speed = 0
-
-[node name="ButtonShowArea" parent="ObstaclePath2D/PathFollow2D/Platform" index="1" instance=ExtResource( 7 )]
-position = Vector2( -16.811, -9.09723 )
-hiddenGroundAnim = NodePath("../../../../HiddenGround")
-
 [node name="HiddenGround" parent="." instance=ExtResource( 6 )]
-position = Vector2( 126.064, 69.5027 )
+position = Vector2( 201, 19 )
 
-[node name="ButtonStopArea" parent="." instance=ExtResource( 5 )]
-position = Vector2( 141.384, 69.6712 )
-movingPlatform = NodePath("../ObstaclePath2D/PathFollow2D")
+[node name="MovingPlatform" parent="." instance=ExtResource( 4 )]
 
-[node name="Camera" parent="." instance=ExtResource( 3 )]
+[node name="CollisionShape2D" parent="MovingPlatform/KinematicBody2D" index="0"]
+one_way_collision = true
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 84, 36 )
+[node name="StopButton" parent="MovingPlatform/KinematicBody2D" index="1" instance=ExtResource( 7 )]
+position = Vector2( -8, -9 )
+motion/sync_to_physics = false
+movingPlatform = NodePath("../..")
 
-[editable path="ObstaclePath2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform"]
+autoplay = "moving_platform"
+anims/RESET = SubResource( 3 )
+anims/moving_platform = SubResource( 4 )
+
+[node name="ShowButton" parent="." instance=ExtResource( 5 )]
+position = Vector2( 73, 30 )
+collision_mask = 11
+motion/sync_to_physics = false
+
+[node name="UniqueGround" type="StaticBody2D" parent="."]
+position = Vector2( 133, 75 )
+collision_layer = 2
+collision_mask = 2
+constant_linear_velocity = Vector2( 0, -250 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UniqueGround"]
+shape = SubResource( 5 )
+one_way_collision = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="UniqueGround/CollisionShape2D"]
+position = Vector2( -0.0194123, 0.0252336 )
+scale = Vector2( 0.333913, 0.798854 )
+frames = SubResource( 15 )
+animation = "jump pad"
+frame = 1
+playing = true
+
+[node name="Collectible" parent="." instance=ExtResource( 8 )]
+position = Vector2( 201, 7 )
+door = NodePath("../Door")
+
+[node name="Sprite" parent="Collectible" index="1"]
+texture = ExtResource( 3 )
+
+[node name="Door" type="StaticBody2D" parent="."]
+position = Vector2( 190, 55 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+shape = SubResource( 6 )
+
+[editable path="MovingPlatform"]
+[editable path="Collectible"]
