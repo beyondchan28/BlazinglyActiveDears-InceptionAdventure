@@ -7,6 +7,8 @@ all needed :
 - making some character needed for the game
 - need to learn about the physics in godot or game in general
 
+53
+54
 
 needed :
 - knockback(X)
@@ -57,7 +59,7 @@ progress :
     > box message ()
 - start coding the game:
     > setting up the level design ()
-    > door mechanics ()
+    > door mechanics (X)
     > respawn (X)
     > grab and moving an object mechanics (X)
 
@@ -66,7 +68,7 @@ bugs :
 - ButtonShow not stopping(X)
 - There's case that the player stuck in the ground after getting knockback (X)
 - How to make the area to only triggered if the player jump and collide on it, not jst collide (X)
-
+- fourth level door bugs. need FILO Stack to get track all last played anim (X)
 
 design :
 - current button logic is not felt great

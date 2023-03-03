@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Unique ground.png" type="Texture" id=1]
 [ext_resource path="res://LevelTwo.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://hidden_ground.tscn" type="PackedScene" id=6]
 [ext_resource path="res://stop_button.tscn" type="PackedScene" id=7]
 [ext_resource path="res://collectible.tscn" type="PackedScene" id=8]
+[ext_resource path="res://icon.png" type="Texture" id=9]
+[ext_resource path="res://player.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -71,6 +73,37 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 10, 2 )
 
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "door"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
 [node name="LevelTwo" type="Node2D"]
 
 [node name="Ground" type="StaticBody2D" parent="." groups=["ground"]]
@@ -91,14 +124,18 @@ polygon = PoolVector2Array( 10.9399, -9.65941, -9.8947, -9.65941, -9.8947, 45.89
 position = Vector2( 201, 19 )
 
 [node name="MovingPlatform" parent="." instance=ExtResource( 4 )]
+position = Vector2( 96.8002, 27.6819 )
 
-[node name="CollisionShape2D" parent="MovingPlatform/KinematicBody2D" index="0"]
-one_way_collision = true
+[node name="KinematicBody2D" parent="MovingPlatform" index="0"]
+position = Vector2( 83, -1 )
 
 [node name="StopButton" parent="MovingPlatform/KinematicBody2D" index="1" instance=ExtResource( 7 )]
-position = Vector2( -8, -9 )
+position = Vector2( -5.16784, -8.72182 )
 motion/sync_to_physics = false
 movingPlatform = NodePath("../..")
+
+[node name="CollisionShape2D" parent="MovingPlatform/KinematicBody2D" index="2"]
+one_way_collision = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform"]
 autoplay = "moving_platform"
@@ -106,7 +143,7 @@ anims/RESET = SubResource( 3 )
 anims/moving_platform = SubResource( 4 )
 
 [node name="ShowButton" parent="." instance=ExtResource( 5 )]
-position = Vector2( 73, 30 )
+position = Vector2( 73.223, 33.2703 )
 collision_mask = 11
 motion/sync_to_physics = false
 
@@ -125,7 +162,7 @@ position = Vector2( -0.0194123, 0.0252336 )
 scale = Vector2( 0.333913, 0.798854 )
 frames = SubResource( 15 )
 animation = "jump pad"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Collectible" parent="." instance=ExtResource( 8 )]
@@ -142,6 +179,20 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 shape = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="Door"]
+self_modulate = Color( 0, 0, 0, 0 )
+position = Vector2( 0.102993, 2.75671e-06 )
+scale = Vector2( 0.307615, 0.0585938 )
+texture = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
+autoplay = "door"
+anims/RESET = SubResource( 16 )
+anims/door = SubResource( 17 )
+
+[node name="Player" parent="." instance=ExtResource( 11 )]
+position = Vector2( 42.1706, 29.9028 )
 
 [editable path="MovingPlatform"]
 [editable path="Collectible"]

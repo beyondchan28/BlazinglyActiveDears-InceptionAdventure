@@ -194,7 +194,7 @@ shape = SubResource( 18 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 0.875, -5.3125 )
+position = Vector2( 1, -10 )
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
 [connection signal="body_entered" from="FootArea" to="." method="_on_FootArea_body_entered" flags=3]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://show_button.gd" type="Script" id=1]
+[ext_resource path="res://show button.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5, 1 )
@@ -10,7 +11,11 @@ collision_layer = 8
 collision_mask = 3
 motion/sync_to_physics = true
 script = ExtResource( 1 )
-hiddenGroundAnim = NodePath("../HiddenGround")
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.0121503, 2.56322 )
+z_index = -1
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
@@ -19,6 +24,7 @@ one_way_collision_margin = 128.0
 
 [node name="StopButtonArea" type="Area2D" parent="."]
 collision_layer = 8
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StopButtonArea"]
 shape = SubResource( 2 )

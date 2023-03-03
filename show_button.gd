@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 export(NodePath) onready var hiddenGroundAnim = get_node(str(hiddenGroundAnim,"/AnimationPlayer"))
+export(bool) var hidden = true
 
 const DOWN = Vector2.DOWN
 const UP = Vector2.UP
@@ -17,6 +18,11 @@ enum BUTTON_STATE {PRESSED, NOT_PRESSED, PRESSED_COMPLETE}
 
 func _ready():
 	ori_pos = self.position
+	if hidden:
+		hiddenGroundAnim.play("hide")
+	else:
+		hiddenGroundAnim.play("showed")
+		
 
 func _physics_process(delta):
 	var length = ori_pos.abs().length() - position.abs().length()
@@ -48,12 +54,6 @@ func play_anim(anim_name: String):
 		hiddenGroundAnim.play(anim_name)
 #		yield(hiddenGroundAnim, "animation_finished")
 		
-
-func _hidden(visible: bool):
-	$CollisionShape2D.set_deferred("disabled", visible)
-	self.set_visible(!visible)
-	print(is_visible())
-	print($CollisionShape2D.is_disabled())
 
 func _on_StopButtonArea_body_entered(body):
 	if body.is_in_group("ground"):

@@ -1,80 +1,275 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://camera.tscn" type="PackedScene" id=1]
-[ext_resource path="res://enemy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://collectible.tscn" type="PackedScene" id=4]
-[ext_resource path="res://cake.png" type="Texture" id=5]
+[ext_resource path="res://LevelFour.png" type="Texture" id=2]
+[ext_resource path="res://hidden_ground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://show_button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://grab_object.tscn" type="PackedScene" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=7]
+[ext_resource path="res://door_level_four.gd" type="Script" id=8]
+[ext_resource path="res://message_popup.gd" type="Script" id=9]
+[ext_resource path="res://font/mago2.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 94.5, 7.5 )
+extents = Vector2( 108.494, 9.37592 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3.25, 35.375 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 3.25, 17.6875 )
+extents = Vector2( 7.5, 28.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 105.5, 3.5 )
+extents = Vector2( 3.58699, 42.2168 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 10.5112, 2 )
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "door"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 5, 5 )
+
+[sub_resource type="DynamicFont" id=7]
+use_mipmaps = true
+extra_spacing_top = -2
+extra_spacing_space = -2
+font_data = ExtResource( 10 )
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("RichTextLabel:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RichTextLabel:visible_characters")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 9 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "text_anim"
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("RichTextLabel:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.25, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0.0, 1.0 ]
+}
 
 [node name="LevelFour" type="Node2D"]
 
+[node name="GrabObject" parent="." instance=ExtResource( 5 )]
+position = Vector2( 27.2849, 78.6441 )
+
 [node name="Camera" parent="." instance=ExtResource( 1 )]
+current = false
 
 [node name="Ground" type="StaticBody2D" parent="." groups=["ground"]]
 position = Vector2( 125.377, 102.194 )
 
 [node name="Sprite" type="Sprite" parent="Ground"]
 position = Vector2( -15, -48 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2( -2.377, -65.194 )
-shape = SubResource( 1 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground"]
-position = Vector2( -31.377, -27.194 )
-shape = SubResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Ground"]
-position = Vector2( -3.377, 6.806 )
+position = Vector2( -17.6207, -6.06992 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Ground"]
-position = Vector2( -122.627, -69.569 )
-shape = SubResource( 2 )
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Ground"]
-position = Vector2( -122.377, -1.8815 )
-shape = SubResource( 4 )
-
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Ground"]
-position = Vector2( 89.623, -30.694 )
+position = Vector2( 87.373, -40.194 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Ground"]
-position = Vector2( -13.877, -99.694 )
-shape = SubResource( 3 )
+[node name="Camera2" parent="." instance=ExtResource( 1 )]
+current = false
 
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 77.0595, 62.7351 )
+[node name="DoorLevelFour" type="Node2D" parent="."]
+script = ExtResource( 8 )
 
-[node name="Door" type="StaticBody2D" parent="."]
-position = Vector2( 16, 126 )
+[node name="ShowButton" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 102.973, 76.7419 )
+hiddenGroundAnim = NodePath("../HiddenGround")
+hidden = false
+
+[node name="ShowButton2" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 130.892, 76.491 )
+hiddenGroundAnim = NodePath("../HiddenGround2")
+hidden = false
+
+[node name="ShowButton3" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 158.643, 76.5041 )
+hiddenGroundAnim = NodePath("../HiddenGround3")
+hidden = false
+
+[node name="ShowButton4" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 185.954, 76.695 )
+hiddenGroundAnim = NodePath("../HiddenGround4")
+hidden = false
+
+[node name="ShowButton5" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 58.1567, 76.9352 )
+hiddenGroundAnim = NodePath("../HiddenGround5")
+hidden = false
+
+[node name="ShowButton6" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 73.5836, 76.8097 )
+hiddenGroundAnim = NodePath("../HiddenGround6")
+hidden = false
+
+[node name="HiddenGround" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 15.5971, 81.9703 )
+
+[node name="HiddenGround2" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 38.5219, 82.02 )
+
+[node name="HiddenGround3" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 38.5349, 72.9104 )
+
+[node name="HiddenGround4" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 15.664, 72.8484 )
+
+[node name="HiddenGround5" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 23.4205, 63.863 )
+
+[node name="HiddenGround6" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 32.6965, 63.9081 )
+
+[node name="HiddenGround7" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 82.0575, 41.5305 )
+
+[node name="HiddenGround8" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 58.6534, 55.619 )
+
+[node name="HiddenGround9" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 112.066, 48.481 )
+
+[node name="HiddenGround10" parent="DoorLevelFour" instance=ExtResource( 3 )]
+position = Vector2( 135.807, 61.6702 )
+
+[node name="ShowButton7" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 117.358, 76.7381 )
+hiddenGroundAnim = NodePath("../HiddenGround7")
+hidden = false
+
+[node name="ShowButton8" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 143.974, 76.5583 )
+hiddenGroundAnim = NodePath("../HiddenGround8")
+hidden = false
+
+[node name="ShowButton9" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 172.055, 76.4691 )
+hiddenGroundAnim = NodePath("../HiddenGround9")
+hidden = false
+
+[node name="ShowButton10" parent="DoorLevelFour" instance=ExtResource( 4 )]
+position = Vector2( 88.2696, 76.765 )
+hiddenGroundAnim = NodePath("../HiddenGround10")
+hidden = false
+
+[node name="Door" type="StaticBody2D" parent="DoorLevelFour"]
+position = Vector2( 48.2148, 44.5381 )
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2( 0.92325, -22 )
-shape = SubResource( 5 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorLevelFour/Door"]
+shape = SubResource( 3 )
 
-[node name="Collectible" parent="." instance=ExtResource( 4 )]
-position = Vector2( 42.3392, 92.3354 )
-door = NodePath("../Door")
+[node name="Sprite" type="Sprite" parent="DoorLevelFour/Door"]
+self_modulate = Color( 0, 0, 0, 0 )
+position = Vector2( -0.00308371, -0.294048 )
+scale = Vector2( 0.112035, 1.31732 )
+texture = ExtResource( 7 )
 
-[node name="Sprite" parent="Collectible" index="1"]
-texture = ExtResource( 5 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DoorLevelFour/Door"]
+autoplay = "door"
+anims/RESET = SubResource( 4 )
+anims/door = SubResource( 5 )
 
-[editable path="Collectible"]
+[node name="MessageBoxTrigger" type="Area2D" parent="DoorLevelFour"]
+position = Vector2( 27.5538, 80.2749 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorLevelFour/MessageBoxTrigger"]
+shape = SubResource( 6 )
+
+[node name="Control" type="Control" parent="DoorLevelFour/MessageBoxTrigger"]
+visible = false
+margin_left = 3.00725
+margin_top = 0.3759
+margin_right = 3.00725
+margin_bottom = 0.3759
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DoorLevelFour/MessageBoxTrigger/Control"]
+margin_left = -19.3406
+margin_top = -34.4767
+margin_right = 30.6594
+margin_bottom = -20.4767
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+custom_fonts/normal_font = SubResource( 7 )
+visible_characters = 9
+text = "tekan C !"
+fit_content_height = true
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DoorLevelFour/MessageBoxTrigger/Control"]
+anims/RESET = SubResource( 8 )
+anims/text_anim = SubResource( 9 )
+
+[connection signal="body_entered" from="DoorLevelFour/MessageBoxTrigger" to="DoorLevelFour/MessageBoxTrigger" method="_on_MessageBoxTrigger_body_entered"]
+[connection signal="body_exited" from="DoorLevelFour/MessageBoxTrigger" to="DoorLevelFour/MessageBoxTrigger" method="_on_MessageBoxTrigger_body_exited"]

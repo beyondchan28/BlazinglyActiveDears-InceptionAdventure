@@ -4,7 +4,7 @@
 
 [sub_resource type="SegmentShape2D" id=9]
 a = Vector2( -125.553, 0.647214 )
-b = Vector2( 107.792, 1.35352 )
+b = Vector2( 6, -2.17199e-05 )
 
 [node name="SwitchCamArea" type="Area2D"]
 collision_layer = 2
