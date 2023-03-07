@@ -17,9 +17,10 @@ func _input(event):
 			else:
 				apply_impulse(Vector2.ZERO, Vector2(-20, -5))
 		else:
-			var bodies = $GrabArea.get_overlapping_bodies()
-			for body in bodies:
-				if body.name == "Player" and body.canPick == true:
-					picked = true
-					body.canPick = false
+			if $GrabArea.is_monitoring():
+				var bodies = $GrabArea.get_overlapping_bodies()
+				for body in bodies:
+					if body.name == "Player" and body.canPick == true:
+						picked = true
+						body.canPick = false
 			

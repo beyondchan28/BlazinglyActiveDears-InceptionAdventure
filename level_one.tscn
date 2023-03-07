@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://collectible.tscn" type="PackedScene" id=1]
 [ext_resource path="res://LevelOne.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Balloons.png" type="Texture" id=4]
 [ext_resource path="res://pause_menu.gd" type="Script" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://background_1.png" type="Texture" id=7]
+[ext_resource path="res://background_2.png" type="Texture" id=8]
+[ext_resource path="res://background_0.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 47.5, 10.7104 )
@@ -48,6 +51,18 @@ tracks/0/keys = {
 }
 
 [node name="LevelOne" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 108.238, 53.4456 )
+scale = Vector2( 0.74721, 0.599367 )
+z_index = -2
+texture = ExtResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Background"]
+texture = ExtResource( 7 )
+
+[node name="Sprite2" type="Sprite" parent="Background"]
+texture = ExtResource( 8 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 2

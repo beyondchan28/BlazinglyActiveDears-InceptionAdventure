@@ -1,14 +1,17 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://LevelFour.png" type="Texture" id=2]
 [ext_resource path="res://hidden_ground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://show_button.tscn" type="PackedScene" id=4]
 [ext_resource path="res://grab_object.tscn" type="PackedScene" id=5]
+[ext_resource path="res://background_1.png" type="Texture" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
 [ext_resource path="res://door_level_four.gd" type="Script" id=8]
 [ext_resource path="res://message_popup.gd" type="Script" id=9]
 [ext_resource path="res://font/mago2.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://background_2.png" type="Texture" id=11]
+[ext_resource path="res://background_0.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 108.494, 9.37592 )
@@ -104,6 +107,18 @@ tracks/0/keys = {
 }
 
 [node name="LevelFour" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 108.238, 53.4456 )
+scale = Vector2( 0.74721, 0.599367 )
+z_index = -2
+texture = ExtResource( 12 )
+
+[node name="Sprite" type="Sprite" parent="Background"]
+texture = ExtResource( 6 )
+
+[node name="Sprite2" type="Sprite" parent="Background"]
+texture = ExtResource( 11 )
 
 [node name="GrabObject" parent="." instance=ExtResource( 5 )]
 position = Vector2( 27.2849, 78.6441 )
@@ -234,7 +249,7 @@ anims/door = SubResource( 5 )
 [node name="MessageBoxTrigger" type="Area2D" parent="DoorLevelFour"]
 position = Vector2( 27.5538, 80.2749 )
 collision_layer = 0
-collision_mask = 2
+collision_mask = 10
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorLevelFour/MessageBoxTrigger"]
