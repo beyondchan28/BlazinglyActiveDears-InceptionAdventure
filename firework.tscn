@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://shoot_firework.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleMesh" id=50]
+
+[node name="Firework" type="MeshInstance2D"]
+self_modulate = Color( 3.08, 2.62, 1.62, 1 )
+scale = Vector2( 0.3, 0.3 )
+mesh = SubResource( 50 )
+script = ExtResource( 1 )

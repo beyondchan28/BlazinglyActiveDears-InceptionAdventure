@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://camera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://LevelFive.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://background_1.png" type="Texture" id=20]
 [ext_resource path="res://background_2.png" type="Texture" id=21]
 [ext_resource path="res://background_0.png" type="Texture" id=22]
+[ext_resource path="res://Fireworks.gd" type="Script" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 110.418, 10.5119 )
@@ -95,17 +96,19 @@ tracks/0/keys = {
 "update": 0,
 "values": [ PoolVector2Array( 0.961357, 0.354542, 0.25425, 85.2074, 59.3176, 85.8695, 107.854, 81.5059, 108.5, 5, 108.449, 81.5059, 152.763, 85.8695, 215.623, 84.3602, 218.802, -0.367947, 113.907, -0.020052 ), PoolVector2Array( 0.961357, 0.354542, 0.25425, 85.2074, 3.03625, 74.1084, 10.0442, 5.36412, 108.5, 5, 210.781, 5.3744, 215.276, 68.769, 215.623, 84.3602, 218.802, -0.367947, 113.907, -0.020052 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:texture:repeat")
+tracks/1/type = "method"
+tracks/1/path = NodePath("../Fireworks/Timer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 1, 0 ]
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ -1 ],
+"method": "start"
+} ]
 }
 
 [sub_resource type="RectangleShape2D" id=36]
@@ -292,32 +295,18 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Gradient" id=45]
-offsets = PoolRealArray( 0, 0.532895 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
-
-[sub_resource type="GradientTexture" id=46]
-gradient = SubResource( 45 )
-width = 220
-
-[sub_resource type="Curve" id=47]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=48]
-curve = SubResource( 47 )
-
-[sub_resource type="ParticlesMaterial" id=49]
-lifetime_randomness = 0.5
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 500.0
-initial_velocity_random = 0.5
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 20.0
-scale_curve = SubResource( 48 )
-color_ramp = SubResource( 46 )
+[sub_resource type="Environment" id=51]
+background_mode = 4
+tonemap_mode = 4
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/4 = true
+glow_levels/6 = true
+glow_levels/7 = true
+glow_blend_mode = 1
+glow_bicubic_upscale = true
+glow_high_quality = true
 
 [node name="LevelFive" type="Node2D"]
 
@@ -349,8 +338,6 @@ shape = SubResource( 1 )
 position = Vector2( -122.763, -62.6431 )
 shape = SubResource( 35 )
 
-[node name="Camera" parent="." instance=ExtResource( 1 )]
-
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 107.551, 34.1166 )
 scale = Vector2( 0.650879, 0.659909 )
@@ -359,6 +346,14 @@ texture_scale = 0.2
 color = Color( 0.988235, 0.509804, 0, 1 )
 energy = 0.7
 shadow_color = Color( 0.878431, 0, 0, 0 )
+
+[node name="Fireworks" type="Node2D" parent="."]
+position = Vector2( 0, 78.175 )
+script = ExtResource( 23 )
+
+[node name="Timer" type="Timer" parent="Fireworks"]
+process_mode = 0
+autostart = true
 
 [node name="Curtain" type="Polygon2D" parent="."]
 color = Color( 1, 0, 0, 1 )
@@ -460,7 +455,6 @@ z_index = -1
 position = Vector2( 65.8505, 52.6925 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 8 )
-frame = 1
 speed_scale = 0.3
 playing = true
 flip_h = true
@@ -469,7 +463,7 @@ flip_h = true
 position = Vector2( 151.067, 52.0583 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 8 )
-frame = 3
+frame = 2
 speed_scale = 0.3
 playing = true
 
@@ -480,27 +474,27 @@ scale = Vector2( 0.5, 0.5 )
 [node name="Cat" type="AnimatedSprite" parent="All Object/Cat"]
 position = Vector2( 180.058, 77.6552 )
 frames = SubResource( 12 )
-frame = 1
 speed_scale = 0.5
 playing = true
 
 [node name="Cat2" type="AnimatedSprite" parent="All Object/Cat"]
 position = Vector2( 156.899, 75.47 )
 frames = SubResource( 19 )
+frame = 3
 speed_scale = 0.5
 playing = true
 
 [node name="Cat6" type="AnimatedSprite" parent="All Object/Cat"]
 position = Vector2( 208.896, 75.155 )
 frames = SubResource( 28 )
-frame = 3
+frame = 2
 speed_scale = 0.5
 playing = true
 
 [node name="Cat3" type="AnimatedSprite" parent="All Object/Cat"]
 position = Vector2( 13.195, 78.3026 )
 frames = SubResource( 20 )
-frame = 2
+frame = 1
 speed_scale = 0.5
 playing = true
 flip_h = true
@@ -508,6 +502,7 @@ flip_h = true
 [node name="Cat4" type="AnimatedSprite" parent="All Object/Cat"]
 position = Vector2( 42.0627, 76.6685 )
 frames = SubResource( 24 )
+frame = 3
 speed_scale = 0.5
 playing = true
 flip_h = true
@@ -515,7 +510,7 @@ flip_h = true
 [node name="Cat5" type="AnimatedSprite" parent="All Object/Cat"]
 position = Vector2( -14.5063, 75.155 )
 frames = SubResource( 28 )
-frame = 3
+frame = 2
 speed_scale = 0.5
 playing = true
 flip_h = true
@@ -526,69 +521,10 @@ position = Vector2( 204.338, 78.6238 )
 [node name="Player" parent="." instance=ExtResource( 15 )]
 position = Vector2( 185.76, 79.3191 )
 
-[node name="Firework" type="Node2D" parent="."]
-position = Vector2( 107.977, 35.1739 )
-scale = Vector2( 0.1, 0.1 )
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 51 )
 
-[node name="Particles2D" type="Particles2D" parent="Firework"]
-self_modulate = Color( 2.65, 0, 0, 1 )
-position = Vector2( 690.779, -66.742 )
-scale = Vector2( 1, 1 )
-emitting = false
-amount = 50
-explosiveness = 1.0
-randomness = 1.0
-draw_order = 1
-process_material = SubResource( 49 )
+[node name="Camera" parent="." instance=ExtResource( 1 )]
 
-[node name="Particles2D2" type="Particles2D" parent="Firework"]
-self_modulate = Color( 0.0828125, 0, 2.65, 1 )
-position = Vector2( -723.434, -20.7802 )
-scale = Vector2( 1, 1 )
-emitting = false
-amount = 50
-explosiveness = 1.0
-randomness = 1.0
-draw_order = 1
-process_material = SubResource( 49 )
-
-[node name="Particles2D3" type="Particles2D" parent="Firework"]
-self_modulate = Color( 0.144922, 2.65, 0, 1 )
-position = Vector2( 319.548, -56.1355 )
-scale = Vector2( 1, 1 )
-emitting = false
-amount = 50
-explosiveness = 1.0
-randomness = 1.0
-draw_order = 1
-process_material = SubResource( 49 )
-
-[node name="Particles2D4" type="Particles2D" parent="Firework"]
-self_modulate = Color( 2.65, 2.48438, 0, 1 )
-position = Vector2( -224.924, -87.9552 )
-scale = Vector2( 1, 1 )
-emitting = false
-amount = 50
-explosiveness = 1.0
-randomness = 1.0
-draw_order = 1
-process_material = SubResource( 49 )
-
-[node name="Particles2D5" type="Particles2D" parent="Firework"]
-self_modulate = Color( 3, 0, 0.77, 1 )
-position = Vector2( 43.7767, -91.4908 )
-scale = Vector2( 1, 1 )
-emitting = false
-amount = 50
-explosiveness = 1.0
-randomness = 1.0
-draw_order = 1
-process_material = SubResource( 49 )
-
-[node name="Control" type="Control" parent="."]
-margin_left = 45.0
-margin_top = 1.0
-margin_right = 170.0
-margin_bottom = 79.0
-
+[connection signal="timeout" from="Fireworks/Timer" to="Fireworks" method="shoot"]
 [connection signal="body_entered" from="PresentTrigger" to="PresentTrigger" method="_on_PresentTrigger_body_entered"]

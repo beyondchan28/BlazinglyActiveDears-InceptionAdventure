@@ -161,6 +161,7 @@ anims/moving_platform = SubResource( 4 )
 position = Vector2( 73.223, 33.2703 )
 collision_mask = 11
 motion/sync_to_physics = false
+hiddenGroundAnim = NodePath("../HiddenGround")
 
 [node name="UniqueGround" type="StaticBody2D" parent="."]
 position = Vector2( 133, 75 )
@@ -177,6 +178,7 @@ position = Vector2( -0.0194123, 0.0252336 )
 scale = Vector2( 0.333913, 0.798854 )
 frames = SubResource( 15 )
 animation = "jump pad"
+frame = 3
 playing = true
 
 [node name="Collectible" parent="." instance=ExtResource( 8 )]
